@@ -2,6 +2,7 @@
 :- use_module(library(lists)).
 :- use_module(library(assert)).
 :- use_module(library(db)).
+:- use_module(library(builtin)).
 
 :- csv_load('output/known_transitions.csv', known_transition).
 :- csv_load('output/known_starting_states.csv', known_starting_state).
@@ -12,9 +13,7 @@
 combine_or(Rest, Term, (Rest; Term)).
 
 compose_disjunctions :-
-    findall(S, known_starting_state(S), States),
-    writeln(States),
-    maplist(compose_disjunction, States).
+    forall(known_starting_state(S), compose_disjunction(S)).
 
 compose_disjunction(Start) :-
     write('composing disjunction for '), writeln(Start),
