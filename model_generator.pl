@@ -6,6 +6,8 @@
 :- csv_load('output/known_transitions.csv', known_transition).
 :- csv_load('output/known_starting_states.csv', known_starting_state).
 
+% For every known starting state, generate an annotated disjunction containing all known possible transitions from
+% that state with blank probabilities. Those probabilities will be learned with the evidence file.
 
 combine_or(Rest, Term, (Rest; Term)).
 
